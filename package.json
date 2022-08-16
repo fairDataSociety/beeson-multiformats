@@ -1,0 +1,24 @@
+{
+  "name": "beeson-multiformats",
+  "version": "1.0.0",
+  "description": "codec for multiformats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fairDataSociety/beeson-multiformats.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fairDataSociety/beeson-multiformats/issues"
+  },
+  "homepage": "https://github.com/fairDataSociety/beeson-multiformats#readme",
+  "dependencies": {
+    "@ethersphere/swarm-cid": "^0.1.0",
+    "@fairdatasociety/beeson": "^0.1.1",
+    "multiformats": "^9.7.1"
+  }
+}
