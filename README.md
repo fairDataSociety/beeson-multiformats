@@ -28,7 +28,7 @@ WIP!
 
 import * as Block from 'multiformats/block'
 import * as codec from '@fairdatasociety/beeson-multiformats'
-import * as swarmCid from '@ethersphere/swarm-cid-js'
+import * as swarmCid from '@ethersphere/swarm-cid'
 
 const value = { hello: 'Swarm Bee' }
 const hasher = {
