@@ -4,8 +4,7 @@ import { ByteView } from 'multiformats/codecs/interface'
 
 export const name = 'beeson'
 
-// Code value is a placeholder, must be one in the multiformats table.csv
-export const code = 0x11
+export const code = 0xfc
 
 /**
  * @param {BeeSon<JsonValue>} node
@@ -15,10 +14,14 @@ export const encode = (node: BeeSon<JsonValue>): ByteView<Uint8Array> => {
   return node.serialize()
 }
 
+async function sleep(ms = 100): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 /**
- * @param {ByteView<Uint8Array>} data
+ * @param {ByteView<Uint8Array>} dataBytes
  * @returns {Uint8Array}
  */
-export const decode = async (dataBytes: Uint8Array): Promise<BeeSon<JsonValue>> => {
+export const decode = (dataBytes: Uint8Array): Promise<BeeSon<JsonValue>> => {
   return BeeSon.deserialize(dataBytes)
 }

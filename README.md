@@ -1,7 +1,5 @@
 # beeson-multiformats
-codec for multiformats
-
-
+beeson codec for multiformats
 
 > Block codec for multiformats
 
@@ -17,38 +15,36 @@ codec for multiformats
 
 ## Install
 
-WIP!
+`npm install @fairdatasociety/beeson-multiformats`
 
 ## Usage
 
-WIP!
-
-
 ```typescript
-
 import * as Block from 'multiformats/block'
-import * as codec from '@fairdatasociety/beeson-multiformats'
-import * as swarmCid from '@ethersphere/swarm-cid'
+import { codec, hasher } from '@fairdatasociety/beeson-multiformats'
+import { BeeSon, Type } from '@fairdatasociety/beeson'
 
-const value = { hello: 'Swarm Bee' }
-const hasher = {
-    digest: input => swarmCid.encodeManifestReference(input)
-}
+let json = [0, '1', false, { name: 'john coke' }, 5]
+const beeson = new BeeSon({ json })
+const value = beeson
 
 // encode a block
-let block = await Block.encode({ value, codec, hasher })
+const block = await Block.encode({ value, codec, hasher })
+// cid: `bah6acgzakjrglswz3olz3tvelmgypkn2r67ofl6jh3cnuqsy6zysmc7rqkcq`
 
-block.value // { hello: 'Swarm Bee' }
-block.bytes // Uint8Array - Beeson serialize
-block.cid   // CID() SwarmManifestCid or SwarmFeedCid
-
-// you can also decode blocks from their binary state (Beeson deserialize)
-block = await Block.decode({ bytes: block.bytes, codec, hasher })
-
-// if you have the cid you can also verify the hash on decode
-block = await Block.create({ bytes: block.bytes, cid: block.cid, codec, hasher })
+// decode a block
+const block2 = await Block.decode({
+    bytes: block.bytes,
+    codec: codec as any,
+    hasher,
+})
+let bs = await block2.value
+// json: [0, '1', false, { name: 'john coke' }, 5]
 ```
 
+## API
+
+TODO
 
 
 ## Maintainers
