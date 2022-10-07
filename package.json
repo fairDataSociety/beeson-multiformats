@@ -1,6 +1,6 @@
 {
   "name": "@fairDataSociety/beeson-multiformats",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "codec for multiformats",
   "main": "dist/index.js",
   "repository": {
@@ -30,6 +30,7 @@
   "dependencies": {
     "@ethersphere/swarm-cid": "^0.1.0",
     "@fairdatasociety/beeson": "^0.1.1",
+    "@fairdatasociety/bmt-js": "^2.0.1",
     "keccak256": "^1.0.6",
     "multiformats": "^9.8.1"
   },
