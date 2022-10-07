@@ -35,16 +35,16 @@ const block = await Block.encode({ value, codec, hasher })
 // decode a block
 const block2 = await Block.decode({
     bytes: block.bytes,
-    codec: codec as any,
+    codec,
     hasher,
 })
 let bs = await block2.value
 // json: [0, '1', false, { name: 'john coke' }, 5]
 ```
 
-## API
+## Notes
 
-TODO
+Support for beeson supertypes and container types is  not available.
 
 
 ## Maintainers

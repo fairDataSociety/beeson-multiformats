@@ -1,7 +1,8 @@
-import * as Block from 'multiformats/block'
-import * as codec from '../../src/codecs'
-import { hasher } from '../../src/hashes'
+import { hasher, codec } from '../../src/index'
 import { BeeSon, Type } from '@fairdatasociety/beeson'
+import * as Block from 'multiformats/block'
+import { BlockDecoder } from 'multiformats/codecs/interface'
+import { JsonValue } from '@fairdatasociety/beeson/dist/types'
 
 describe('beeson', () => {
   it('should work with integer type', async () => {
@@ -24,7 +25,7 @@ describe('beeson', () => {
       },
     }
 
-    const result = `bah6acgzagzzvlpstid4tluevw3vfaapezmhheclr5zstbrm7kzvi52jhaa4a`
+    const result = `bah6acgzaseghlmme4zvgvftofrvg7mrcctm3jje3vvmw5h56jf4ncngtj4wq`
     expect(block.value).toEqual(blockValue)
     expect(block.bytes.length).toBe(64)
     expect(block.cid.toString()).toBe(result)
@@ -32,7 +33,7 @@ describe('beeson', () => {
     // decode a block
     const block2 = await Block.decode({
       bytes: block.bytes,
-      codec: codec as any,
+      codec: codec as BlockDecoder<252, BeeSon<JsonValue>>,
       hasher,
     })
     expect(await block2.value).toEqual(blockValue)
@@ -40,7 +41,7 @@ describe('beeson', () => {
     // decode a block using create
     const block3 = await Block.create({
       bytes: block.bytes,
-      codec: codec as any,
+      codec: codec as BlockDecoder<252, BeeSon<JsonValue>>,
       cid: block.cid,
       hasher,
     })
@@ -57,7 +58,7 @@ describe('beeson', () => {
     // encode a block
     const block = await Block.encode({ value, codec, hasher })
 
-    const result = `bah6acgzavnfndt5plpqhtgjzo4svzuflmgd3myu2uc7hldr4irch5h5dlu4a`
+    const result = `bah6acgza5oh7urstecv7kue2j4h7ce3x3esf6ncuopimtuonsqoukekfnyxa`
     // expect(block.value).toEqual(blockValue)
     expect(block.bytes.length).toBe(288)
     expect(block.cid.toString()).toBe(result)
@@ -65,7 +66,7 @@ describe('beeson', () => {
     // decode a block
     const block2 = await Block.decode({
       bytes: block.bytes,
-      codec: codec as any,
+      codec: codec as BlockDecoder<252, BeeSon<JsonValue>>,
       hasher,
     })
     let bs = await block2.value
@@ -74,7 +75,7 @@ describe('beeson', () => {
     // decode a block using create
     const block3 = await Block.create({
       bytes: block.bytes,
-      codec: codec as any,
+      codec: codec as BlockDecoder<252, BeeSon<JsonValue>>,
       cid: block.cid,
       hasher,
     })
@@ -83,7 +84,7 @@ describe('beeson', () => {
   })
 
   it('should work with 1 level object', async () => {
-    let json = { name: 'john coke', age: 48, id: 'ID2' }
+    const json = { name: 'john coke', age: 48, id: 'ID2' }
     const beeson = new BeeSon({ json })
     expect(beeson.typeManager.type).toStrictEqual(Type.object)
     expect(beeson.json).toStrictEqual(json)
@@ -92,7 +93,7 @@ describe('beeson', () => {
     // encode a block
     const block = await Block.encode({ value, codec, hasher })
 
-    const result = `bah6acgzaasi2aaavu7bmp5vobzhbtfk2msqmvsuuzvl6ts2hzxsiwzoefx3q`
+    const result = `bah6acgzadynfj2sof6jefyxcnvbo36pbahwjkglv2gfb3pptnf44cjwj4cba`
     // expect(block.value).toEqual(blockValue)
     expect(block.bytes.length).toBe(192)
     expect(block.cid.toString()).toBe(result)
@@ -100,7 +101,7 @@ describe('beeson', () => {
     // decode a block
     const block2 = await Block.decode({
       bytes: block.bytes,
-      codec: codec as any,
+      codec: codec as BlockDecoder<252, BeeSon<JsonValue>>,
       hasher,
     })
     let bs = await block2.value
@@ -109,7 +110,7 @@ describe('beeson', () => {
     // decode a block using create
     const block3 = await Block.create({
       bytes: block.bytes,
-      codec: codec as any,
+      codec: codec as BlockDecoder<252, BeeSon<JsonValue>>,
       cid: block.cid,
       hasher,
     })
@@ -118,7 +119,7 @@ describe('beeson', () => {
   })
 
   it('should work with polymorphic arrays', async () => {
-    let json = [0, '1', false, { name: 'john coke' }, 5]
+    const json = [0, '1', false, { name: 'john coke' }, 5]
     const beeson = new BeeSon({ json })
     expect(beeson.typeManager.type).toStrictEqual(Type.array)
     expect(beeson.json).toStrictEqual(json)
@@ -126,7 +127,7 @@ describe('beeson', () => {
     // encode a block
     const block = await Block.encode({ value, codec, hasher })
 
-    const result = `bah6acgzakjrglswz3olz3tvelmgypkn2r67ofl6jh3cnuqsy6zysmc7rqkcq`
+    const result = `bah6acgzavrfexn2pvvoqydyzzcd6lw4hzd52slzvkav7i3u7vgxcqfmctxaq`
     // expect(block.value).toEqual(blockValue)
     expect(block.bytes.length).toBe(288)
     expect(block.cid.toString()).toBe(result)
@@ -134,7 +135,7 @@ describe('beeson', () => {
     // decode a block
     const block2 = await Block.decode({
       bytes: block.bytes,
-      codec: codec as any,
+      codec: codec as BlockDecoder<252, BeeSon<JsonValue>>,
       hasher,
     })
     let bs = await block2.value
@@ -143,7 +144,7 @@ describe('beeson', () => {
     // decode a block using create
     const block3 = await Block.create({
       bytes: block.bytes,
-      codec: codec as any,
+      codec: codec as BlockDecoder<252, BeeSon<JsonValue>>,
       cid: block.cid,
       hasher,
     })
@@ -152,7 +153,7 @@ describe('beeson', () => {
   })
 
   it('should work with complex object', async () => {
-    let json = { name: 'john coke', age: 48, id: 'ID2', buddies: [{ name: 'jesus', age: 33, id: 'ID1' }] }
+    const json = { name: 'john coke', age: 48, id: 'ID2', buddies: [{ name: 'jesus', age: 33, id: 'ID1' }] }
     const beeson = new BeeSon({ json })
     expect(beeson.typeManager.type).toStrictEqual(Type.object)
     expect(beeson.json).toStrictEqual(json)
@@ -160,15 +161,14 @@ describe('beeson', () => {
     // encode a block
     const block = await Block.encode({ value, codec, hasher })
 
-    const result = `bah6acgzaksedsxjgp53hao2p6njbgcxup4euwjgdfegynt6k3wjlw2zytlya`
+    const result = `bah6acgzaqufakm2ximqq7xnebhgg2x2hs6blymcx64uteusf5rdwnwcsdkoa`
     // expect(block.value).toEqual(blockValue)
-    expect(block.bytes.length).toBe(384)
     expect(block.cid.toString()).toBe(result)
 
     // decode a block
     const block2 = await Block.decode({
       bytes: block.bytes,
-      codec: codec as any,
+      codec: codec as BlockDecoder<252, BeeSon<JsonValue>>,
       hasher,
     })
     let bs = await block2.value
@@ -177,7 +177,7 @@ describe('beeson', () => {
     // decode a block using create
     const block3 = await Block.create({
       bytes: block.bytes,
-      codec: codec as any,
+      codec: codec as BlockDecoder<252, BeeSon<JsonValue>>,
       cid: block.cid,
       hasher,
     })
