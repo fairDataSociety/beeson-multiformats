@@ -1,6 +1,6 @@
 {
-  "name": "@fairDataSociety/beeson-multiformats",
-  "version": "0.1.0",
+  "name": "@fairdatasociety/beeson-multiformats",
+  "version": "1.0.0",
   "description": "codec for multiformats",
   "main": "dist/index.js",
   "repository": {
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "jest --verbose --config=jest.config.ts",
-    "compile": "webpack --progress --env target=node",
+    "compile": "tsc",
     "compile:types": "tsc --emitDeclarationOnly --declaration --skipLibCheck"
   },
   "keywords": [
@@ -30,7 +30,6 @@
   "dependencies": {
     "@ethersphere/swarm-cid": "^0.1.0",
     "@fairdatasociety/beeson": "^0.1.1",
-    "@fairdatasociety/bmt-js": "^2.0.1",
     "keccak256": "^1.0.6",
     "multiformats": "^9.8.1"
   },
