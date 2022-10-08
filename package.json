@@ -1,6 +1,6 @@
 {
   "name": "@fairdatasociety/beeson-multiformats",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "codec for multiformats",
   "main": "dist/index.js",
   "repository": {
