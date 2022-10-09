@@ -35,7 +35,7 @@ const base = async (env?: Partial<WebpackEnvParams>): Promise<Configuration> => 
       path,
       filename,
       sourceMapFilename: filename + '.map',
-      library: 'BeeSon',
+      library: 'beeson-multiformats',
       libraryTarget: 'umd',
       globalObject: 'this',
     },
