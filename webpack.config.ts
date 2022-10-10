@@ -15,7 +15,7 @@ const base = async (env?: Partial<WebpackEnvParams>): Promise<Configuration> => 
   const isProduction = env?.mode === 'production'
   const filename =
     env?.fileName ||
-    ['index', isProduction ? '.min' : null, '.js'].filter(Boolean).join('')
+    ['index', isProduction ? '' : null, '.js'].filter(Boolean).join('')
   const entry = Path.resolve(__dirname, 'src')
   const path = Path.resolve(__dirname, 'dist')
   const target = 'web'
